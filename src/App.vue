@@ -1,22 +1,25 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
   <router-view />
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+
+/* 전역 폰트 설정 */
+* {
+  font-family: "Noto Sans KR", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+}
+
+.ant-input,
+.ant-picker {
+  font-family: inherit;
 }
 
 nav {
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 nav a {
