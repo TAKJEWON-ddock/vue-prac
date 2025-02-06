@@ -78,7 +78,11 @@
 
       <a-form-item name="birthday">
         <P class="input-title">생년월일</P>
-        <a-date-picker size="large" v-model:value="formState.birthday" />
+        <a-date-picker
+          placeholder="날짜를 선택해주세요"
+          size="large"
+          v-model:value="formState.birthday"
+        />
       </a-form-item>
 
       <a-form-item class="confirm-buttons">
