@@ -94,8 +94,8 @@
     </a-form>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import FormInput from "../components/signup/FormInput.vue";
 
 interface FormState {
@@ -108,46 +108,32 @@ interface FormState {
   birthday: string;
 }
 
-export default defineComponent({
-  components: {
-    FormInput,
-  },
-  methods: {
-    validatePasswordConfirm(_: string, value: string) {
-      return new Promise((resolve, reject) => {
-        if (value === this.formState.password) {
-          resolve(""); // 검증 통과
-        } else {
-          reject("비밀번호가 일치하지 않습니다"); // 검증 실패
-        }
-      });
-    },
-  },
-  setup() {
-    const formState = ref<FormState>({
-      username: "",
-      password: "",
-      passwordConfirm: "",
-      name: "",
-      phoneNumber: "",
-      email: "",
-      birthday: "",
-    });
-    const onFinish = (values: FormState) => {
-      console.log("Success:", values);
-    };
-
-    const onFinishFailed = (errorInfo: FormState) => {
-      console.log("Failed:", errorInfo);
-    };
-
-    return {
-      formState,
-      onFinish,
-      onFinishFailed,
-    };
-  },
+const formState = ref<FormState>({
+  username: "",
+  password: "",
+  passwordConfirm: "",
+  name: "",
+  phoneNumber: "",
+  email: "",
+  birthday: "",
 });
+
+function validatePasswordConfirm(_: string, value: string) {
+  return new Promise((resolve, reject) => {
+    if (value === formState.value.password) {
+      resolve(""); // 검증 통과
+    } else {
+      reject("비밀번호가 일치하지 않습니다"); // 검증 실패
+    }
+  });
+}
+const onFinish = (values: FormState) => {
+  console.log("Success:", values);
+};
+
+const onFinishFailed = (errorInfo: FormState) => {
+  console.log("Failed:", errorInfo);
+};
 </script>
 
 <style scoped>
@@ -161,7 +147,6 @@ export default defineComponent({
   background-color: #f9f9f9;
 }
 
-/* Form 스타일 */
 .ant-form {
   width: 100%;
   max-width: 550px;
