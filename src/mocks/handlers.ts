@@ -51,6 +51,6 @@ export const handlers = [
   http.post("/signup", async ({ request }) => {
     const newPost = await request.json();
     localStorage.setItem("userInfo", JSON.stringify(newPost));
-    return HttpResponse.json(newPost, { status: 201 });
+    return HttpResponse.json(newPost, { status: 200 });
   }),
 ];

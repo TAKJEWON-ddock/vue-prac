@@ -7,5 +7,5 @@ export const hello = async function () {
 
 export const signUp = async function (params: any) {
   const response = await axios.post("/signup", params);
-  return response.data.message;
+  return response;
 };

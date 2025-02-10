@@ -3,9 +3,9 @@ import SignUpView from "../view/SignUpView.vue";
 import LoginView from "../view/LoginView.vue";
 
 const routes = [
-  { path: "/login", component: SignUpView },
+  { path: "/", component: SignUpView },
   {
-    path: "/",
+    path: "/login",
     component: LoginView,
   },
 ];

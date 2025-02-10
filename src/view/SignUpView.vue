@@ -100,8 +100,11 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { Modal } from "ant-design-vue";
+import { h } from "vue";
 import FormInput from "../components/signup/FormInput.vue";
 import { hello, signUp } from "../services/fetchers";
+import router from "../router";
 
 interface FormState {
   id: string;
@@ -137,13 +140,22 @@ const loading = ref<boolean>(false);
 
 const onFinish = async (values: FormState) => {
   try {
-    loading.value = true; 
-    const message = await signUp(values); 
-    console.log("Success:", values, message); 
+    loading.value = true;
+    const result = await signUp(values);
+    if (result.status == 200) {
+      Modal.success({
+        title: "회원가입 성공",
+        content: "로그인 하시겠습니까?",
+        okText: "네",
+        onOk() {
+          router.push("login");
+        },
+      });
+    }
   } catch (error) {
-    console.error("Sign up failed:", error); 
+    console.error("Sign up failed:", error);
   } finally {
-    loading.value = false; 
+    loading.value = false;
   }
 };
 
