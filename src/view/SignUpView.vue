@@ -93,7 +93,7 @@
           :loading="loading"
           >가입하기</a-button
         >
-        <a-button @click="hello()">가입취소</a-button>
+        <a-button @click="moveToLoginPage()">로그인</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -101,9 +101,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { Modal } from "ant-design-vue";
-import { h } from "vue";
 import FormInput from "../components/signup/FormInput.vue";
-import { hello, signUp } from "../services/fetchers";
+import { signUp } from "../services/fetchers";
 import router from "../router";
 
 interface FormState {
@@ -161,6 +160,10 @@ const onFinish = async (values: FormState) => {
 
 const onFinishFailed = (errorInfo: FormState) => {
   console.log("Failed:", errorInfo);
+};
+
+const moveToLoginPage = () => {
+  router.push("login");
 };
 
 onMounted(() => {});

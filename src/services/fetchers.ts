@@ -9,3 +9,8 @@ export const signUp = async function (params: any) {
   const response = await axios.post("/signup", params);
   return response;
 };
+
+export const signIn = async function (params: any) {
+  const response = await axios.post("/signin", params);
+  return response;
+};

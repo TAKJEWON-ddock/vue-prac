@@ -48,8 +48,9 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
+import { Modal } from "ant-design-vue";
 import FormInput from "../components/signup/FormInput.vue";
-import { hello, signUp } from "../services/fetchers";
+import { signIn } from "../services/fetchers";
 
 interface FormState {
   id: string;
@@ -66,10 +67,23 @@ const loading = ref<boolean>(false);
 const onFinish = async (values: FormState) => {
   try {
     loading.value = true;
-    const message = await signUp(values);
-    console.log("Success:", values, message);
+    const result = await signIn(values);
+    if (result.status == 200) {
+      Modal.success({
+        title: "로그인 성공",
+        content: "로그인에 성공하셨습니다.",
+        okText: "네",
+        onOk() {},
+      });
+    }
   } catch (error) {
     console.error("Sign up failed:", error);
+    Modal.error({
+      title: "로그인 실패",
+      content: "로그인에 실패하셨습니다.",
+      okText: "네",
+      onOk() {},
+    });
   } finally {
     loading.value = false;
   }
